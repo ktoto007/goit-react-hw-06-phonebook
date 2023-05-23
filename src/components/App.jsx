@@ -4,7 +4,6 @@ import { ContactList } from './contactList/ContactList';
 import { Filter } from './filter/Filter';
 
 export const App = () => {
-  console.log('проверка');
   return (
     <>
       <h2>Phonebook</h2>
