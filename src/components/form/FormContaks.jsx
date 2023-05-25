@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 import { object, string } from 'yup';
 import { nanoid } from 'nanoid';
@@ -6,6 +6,7 @@ import { FormLabel, FormInput, StyledForm } from './FormContaks.styled';
 import { addContact } from 'redux/phonebookSlise';
 
 export const FormContaks = () => {
+  const contacts = useSelector(state => state.phonebook.contacts);
   const dispatch = useDispatch();
 
   const schema = object({
@@ -20,8 +21,18 @@ export const FormContaks = () => {
 
   const handleSubmit = (values, { resetForm }) => {
     const contact = { id: nanoid(), ...values };
-    dispatch(addContact(contact));
+
     resetForm();
+    if (
+      contacts.some(
+        ({ name }) => name.toLowerCase() === values.name.toLowerCase()
+      )
+    ) {
+      alert(`${values.name} is already in contacts`);
+      return;
+    } else {
+      dispatch(addContact(contact));
+    }
   };
 
   return (

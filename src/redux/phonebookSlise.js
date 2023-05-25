@@ -9,16 +9,7 @@ const phonebookSlice = createSlice({
   initialState: phonebookInitialState,
   reducers: {
     addContact(state, action) {
-      if (
-        state.contacts.some(
-          ({ name }) => name.toLowerCase() === action.payload.name.toLowerCase()
-        )
-      ) {
-        alert(`${action.payload.name} is already in contacts`);
-        return [...state];
-      } else {
-        state.contacts.push(action.payload);
-      }
+      state.contacts.push(action.payload);
     },
 
     removeContact(state, action) {
