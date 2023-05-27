@@ -9,16 +9,23 @@ const phonebookSlice = createSlice({
   initialState: phonebookInitialState,
   reducers: {
     addContact(state, action) {
+      console.log(state.contacts.findIndex);
       state.contacts.push(action.payload);
     },
 
     removeContact(state, action) {
-      return {
-        ...state,
-        contacts: state.contacts.filter(
-          contact => contact.id !== action.payload.id
-        ),
-      };
+      // return {
+      //   ...state,
+      //   contacts: state.contacts.filter(
+      //     contact => contact.id !== action.payload.id
+      //   ),
+      // };
+
+      const index = state.contacts.findIndex(
+        item => item.id === action.payload.id
+      );
+      console.log(state.contacts.splice(index, 1));
+      state.contacts.splice(index, 1);
     },
 
     filtredContacts(state, action) {
